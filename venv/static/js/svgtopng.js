@@ -1,4 +1,6 @@
 function save_to_png(img_id){
+  d3.selectAll(".TextBox")
+	.style({"font-family": "Helvetica"})
   d3.selectAll(".Histogram .line")
 	.style({"shape-rendering": "crispEdges"})
   d3.selectAll(".LineChart .line")
@@ -9,12 +11,14 @@ function save_to_png(img_id){
 	.style({"stroke-width": "1px", "shape-rendering": "crispEdges"})
   d3.selectAll(".axis path")
 	.style({"fill": "none", "stroke": "#000", "stroke-width": "1px", "shape-rendering": "crispEdges"})
+  d3.selectAll(".axis")
+	.style({"font-family": "Helvetica"})
   d3.selectAll(".axis .tick line")
 	.style({"stroke": "#000", "stroke-width": "1px", "shape-rendering": "crispEdges"})
   d3.selectAll(".grid")
 	.style({"fill": "none", "stroke": "#e0e0e0", "shape-rendering": "crispEdges"})
   d3.selectAll(".axis-label")
-	.style({"font-size": "0.9em"})
+	.style({"font-size": "0.9em", "font-family": "Helvetica"})
   d3.selectAll(".TextBox rect")
 	.style({"shape-rendering": "crispEdges"})
   d3.selectAll(".brush .extent")
@@ -39,7 +43,7 @@ function save_to_png(img_id){
   //console.log(html);
   //var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
   var imgsrc = 'data:image/svg+xml;utf8,'+ encodeURIComponent(html);
-  var img = '<img src="'+imgsrc+'">'; 
+  //var img = '<img src="'+imgsrc+'">'; 
   //d3.select("#svgdataurl").html(img);
 
   var srcCanvas = document.querySelector("canvas"),
@@ -53,8 +57,8 @@ function save_to_png(img_id){
 	  context.drawImage(image, 0, 0);  
 	  var canvasdata = srcCanvas.toDataURL("image/png");
 
-	  var pngimg = '<img src="'+canvasdata+'">'; 
-  	  d3.select("#pngdataurl").html(pngimg);
+	 // var pngimg = '<img src="'+canvasdata+'">'; 
+  	 // d3.select("#pngdataurl").html(pngimg);
 
 	  var a = document.createElement("a");
 	  a.download = "sample.png";

@@ -4,11 +4,13 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/examples.css') }}">
     {% endblock %}
 {% block content %}
-<button id="save">Save as Image</button>
-
-<div id="svgdataurl"></div>
-<div id="pngdataurl" style="display:none"></div>
-<canvas width="960" height="600" style="display:none"></canvas>
+<!-- TESTING SAVING !-->
+<!--<button id="save">Save as Image</button>
+<div id="svgdataurl" style="display:none"></div>
+<div id="pngdataurl" style="display:none"></div>!-->
+<!-- --------------------------------------------- !-->
+<!-- CANVAS FOR CONVERTED IMAGE FROM SVG !-->
+<canvas width="550" height="550" style="display:none"></canvas>
     <div class="page-header">
         <h1>Experimental conditions</h1>
     </div>
