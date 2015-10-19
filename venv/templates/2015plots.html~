@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+    {% block head %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/examples.css') }}">
+    {% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="page-header">
+        <h1>2015 Plots</h1>
+    </div>
+    <div class="row">
+  	<div class="col-sm-4">
+		<div class="list-group">
+		  <button type="submit" class="list-group-item" id="addPeakLumiFill">Peak Instantaneous Lumi over LHC Fill Number</a>
+		  <button type="submit" class="list-group-item" id="addPeakLumiTime">Peak Instantaneous Lumi over Time</a>
+		  <button type="submit" class="list-group-item" id="addAvgLumiFill">Average Instantaneous Lumi over LHC Fill Number</a>
+		  <button type="submit" class="list-group-item" id="addAvgLumiTime">Average Instantaneous Lumi over Time</a>
+		</div>
+	</div>
+  	<div class="col-xs-6">
+		<div class="container" id="plots">
+		<script type="text/javascript">
+		$("#addPeakLumiFill").mousedown(function(){
+			$('#plots').load(document.URL +  ' #plots');
+			});
+		$("#addPeakLumiFill").mouseup(function(){
+			$('<img class="img-responsive" src="{{ url_for('static', filename='img/OUTPUTPLOTS/2015PeakLumiFill.png') }}">').appendTo($("#plots"));
+			wheelzoom(document.querySelector('img.img-responsive'));
+			});
+		$("#addPeakLumiTime").mousedown(function(){
+			$('#plots').load(document.URL +  ' #plots');
+			});
+		$("#addPeakLumiTime").mouseup(function(){
+			$('<img class="img-responsive" src="{{ url_for('static', filename='img/OUTPUTPLOTS/2015PeakLumiTime.png') }}">').appendTo($("#plots"));
+			wheelzoom(document.querySelector('img.img-responsive'));
+			});
+		$("#addAvgLumiFill").mousedown(function(){
+			$('#plots').load(document.URL +  ' #plots');
+			});
+		$("#addAvgLumiFill").mouseup(function(){
+			$('<img class="img-responsive" src="{{ url_for('static', filename='img/OUTPUTPLOTS/2015AvgLumiFill.png') }}">').appendTo($("#plots"));
+			wheelzoom(document.querySelector('img.img-responsive'));
+			});
+		$("#addAvgLumiTime").mousedown(function(){
+			$('#plots').load(document.URL +  ' #plots');
+			});
+		$("#addAvgLumiTime").mouseup(function(){
+			$('<img class="img-responsive" src="{{ url_for('static', filename='img/OUTPUTPLOTS/2015AvgLumiTime.png') }}">').appendTo($("#plots"));
+			wheelzoom(document.querySelector('img.img-responsive'));
+			});
+		</script>
+
+	</div>
+</div>
+    </div>
+</div>
+
+
+
+<!-- d3.js plotting scripts!-->
+  <script src="../static/js/lib/d3.v3.min.js"></script>
+  <script src="../static/js/lib/d3.chart.min.js"></script>
+  <script src="../static/js/dist/d3.chart.histograms.js?n=1"></script>
+
+  <script src="../static/js/wheelzoom.js"></script>
+  
+
+<!-- google analytics scripts !-->
+<script src="http://www.google-analytics.com/ga.js" async="" type="text/javascript"></script>
+<script type="text/javascript">var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-941940-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();</script>
+
+<!-- boostrap scripts!-->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+{% endblock %}

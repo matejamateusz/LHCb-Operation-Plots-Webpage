@@ -1,0 +1,172 @@
+{% extends "layout.html" %}
+    {% block head %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/examples.css') }}">
+    {% endblock %}
+{% block content %}
+<button id="save">Save as Image</button>
+
+<div id="svgdataurl"></div>
+<div id="pngdataurl" style="display:none"></div>
+<canvas width="960" height="600" style="display:none"></canvas>
+    <div class="page-header">
+        <h1>Experimental conditions</h1>
+    </div>
+<div class="row">
+    <div id="select">
+        <p>
+           Please put the RunNumber and press select: <input type=text size=10 name=a id="input_rnr" onKeyPress="return check(event,value)" onInput="checkLength()"/>
+            <a href=# id=select>SELECT</a>
+        </p>
+        <p>
+            Your selected RunNumber is:  <span id=result>?</span>
+            <input name="Load the plots" id="load_plots" value="Load the plots" type="button" />
+        </p>
+
+    </div>
+</div>
+<div class="container">
+<div class="row row-centered" id="svgs">
+    <div id="svg0" class="col-xs-6 col-centered col-min"></div>
+<div id="svg1" class="col-xs-6 col-centered col-min"></div>
+<div class="row row-centered" id="svgs">
+<div id="button_svg0" class="col-xs-6 col-centered col-min"></div>
+<div id="button_svg1" class="col-xs-6 col-centered col-min"></div>
+<div class="row row-centered" id="svgs">
+    <div id="svg2" class="col-xs-6 col-centered col-min"></div>
+<div id="svg3" class="col-xs-6 col-centered col-min"></div>
+<div class="row row-centered" id="svgs">
+<div id="button_svg2" class="col-xs-6 col-centered col-min"></div>
+<div id="button_svg3" class="col-xs-6 col-centered col-min"></div>
+<div class="row row-centered" id="svgs">
+    <div id="svg4" class="col-xs-6 col-centered col-min"></div>
+<div id="svg5" class="col-xs-6 col-centered col-min"></div>
+<div class="row row-centered" id="svgs">
+<div id="button_svg4" class="col-xs-6 col-centered col-min"></div>
+<div id="button_svg5" class="col-xs-6 col-centered col-min"></div>
+<div class="row row-centered" id="svgs">
+    <div id="svg6" class="col-xs-6 col-centered col-min"></div>
+<div id="svg7" class="col-xs-6 col-centered col-min"></div>
+<div class="row row-centered" id="svgs">
+<div id="button_svg6" class="col-xs-6 col-centered col-min"></div>
+<div id="button_svg7" class="col-xs-6 col-centered col-min"></div>
+</div>
+</div>
+
+<!-- submitting RunNumber and reloading the page after change in the submitting form !-->
+<script type="text/javascript">
+  $(document).ready( function() {
+    $('input[name=a]').change(function() {
+	
+     });
+  });
+  $(function() {
+    var submit_form = function(e) {
+      $.getJSON($SCRIPT_ROOT + '/home/_select', {
+        a: $('input[name="a"]').val(),
+      }, function(data) {
+        $('#result').text(data.result);
+        $('input[name=a]').focus().select();
+      });
+      return false;
+    };
+    $('a#select').bind('click', submit_form);
+    $('a#select').click(function (){
+	$('#svgs').load(document.URL +  ' #svgs');
+	});
+    $('input[type=text]').bind('keydown', function(e) {
+      if (e.keyCode == 13) {
+        submit_form(e);
+      }
+    });
+    $('input[name=a]').focus();
+  });
+</script>
+
+<!-- allowing only numbers in the input !-->
+<script>
+    function check(e,value){
+    //Check Charater
+        var unicode=e.charCode? e.charCode : e.keyCode;
+        if (value.indexOf(".") != -1)if( unicode == 46 )return false;
+        if (unicode!=8)if((unicode<48||unicode>57)&&unicode!=46)return false;
+    }
+    function checkLength(){
+    var fieldLength = document.getElementById('input_rnr').value.length;
+    //Suppose u want 4 number of character
+    if(fieldLength <= 6){
+        return true;
+    }
+    else
+    {
+        var str = document.getElementById('input_rnr').value;
+        str = str.substring(0, str.length - 1);
+    document.getElementById('input_rnr').value = str;
+    }
+    }
+</script>
+<!-- disabling/enabling button script !-->
+<script>
+  function disableEnableBtn(ids)
+ {
+  // traverses the array with IDs
+  var nrids = ids.length;
+  for(var i=0; i<nrids; i++)
+  {
+    // registers onclick event to each button
+    if(document.getElementById(ids[i]))
+    {
+       document.getElementById(ids[i]).onclick = function()
+       {
+           this.setAttribute('disabled', 'disabled');     // disables the button by adding the 'disabled' attribute
+           this.innerHTML = 'Disabled';        // changes the button text
+           var idbtn = this.id;       // stores the button ID
+           $.getScript('../static/js/examples.js');
+           // calls a function after 2 sec. (2000 milliseconds)
+           setTimeout( function()
+                {
+                    document.getElementById(idbtn).removeAttribute('disabled');         // removes the "disabled" attribute
+                    document.getElementById(idbtn).innerHTML = 'Click';        // changes tne button text
+                }, 4000 );
+       }
+    }
+  }
+}
+// array with IDs of buttons
+var btnid = ['load_plots'];
+disableEnableBtn(btnid);      // calls the function
+</script>
+
+
+
+<!-- d3.js plotting scripts!-->
+  <script src="../static/js/lib/d3.v3.min.js"></script>
+  <script src="../static/js/lib/d3.chart.min.js"></script>
+  <script src="../static/js/dist/d3.chart.histograms.js?n=1"></script>
+  <script src="../static/js/svgtopng.js"></script>
+  <!--<script src="../static/js/svgtopng2.js"></script>!-->
+
+
+<!-- google analytics scripts !-->
+<script src="http://www.google-analytics.com/ga.js" async="" type="text/javascript"></script>
+<script type="text/javascript">var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-941940-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();</script>
+
+<!-- boostrap scripts !-->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+{% endblock %}
