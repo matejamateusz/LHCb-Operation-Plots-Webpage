@@ -1,23 +1,17 @@
 from venv import app
 from flask import Flask, render_template, request, flash, session, redirect, url_for, jsonify
-#import LOGIN.forms
-from venv.forms import ContactForm, SignupForm, SigninForm
-from flask.ext.mail import Message, Mail
 from venv.models import db, User
-from venv.tasks import *
 from subprocess import Popen, PIPE
-#import ROOT
 import os
 import json
 os.environ['TERM'] = 'dumb'
-mail = Mail()
 
 @app.route('/')
 def home():
     return render_template('home.html')
 
 @app.route('/2015plots')
-def 2015plots():
+def plots2015():
     return render_template('2015plots.html')
 
 @app.route('/home/_select')
