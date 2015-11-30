@@ -108,6 +108,11 @@
     }
     }
 </script>
+<script>
+$("#load_plots").mousedown(function(){
+			$('#svgs').load(document.URL +  ' #svgs');
+			});
+</script>
 <!-- disabling/enabling button script with LOADING THE PLOTS !-->
 <script>
   function disableEnableBtn(ids)
@@ -122,14 +127,12 @@
        document.getElementById(ids[i]).onclick = function()
        {
            this.setAttribute('disabled', 'disabled');     // disables the button by adding the 'disabled' attribute
-           this.innerHTML = 'Disabled';        // changes the button text
            var idbtn = this.id;       // stores the button ID
-           $.getScript('../static/js/examples.js'); // LOADING PLOTS VIA SCRIPT !!!
+           $.getScript('{{ url_for('static', filename='js/examples.js') }}'); // LOADING PLOTS VIA SCRIPT !!!
            // calls a function after 4 sec. (4000 milliseconds)
            setTimeout( function()
                 {
                     document.getElementById(idbtn).removeAttribute('disabled');         // removes the "disabled" attribute
-                    document.getElementById(idbtn).innerHTML = 'Click';        // changes tne button text
                 }, 4000 );
        }
     }
