@@ -11,10 +11,10 @@
     <div class="row">
   	<div class="col-sm-4">
 		<div class="list-group">
-		  <button type="submit" class="list-group-item" id="addPeakLumiFill">Peak Instantaneous Lumi over LHC Fill Number</a>
-		  <button type="submit" class="list-group-item" id="addPeakLumiTime">Peak Instantaneous Lumi over Time</a>
-		  <button type="submit" class="list-group-item" id="addAvgLumiFill">Average Instantaneous Lumi over LHC Fill Number</a>
-		  <button type="submit" class="list-group-item" id="addAvgLumiTime">Average Instantaneous Lumi over Time</a>
+		  <button type="submit" class="list-group-item" id="addPeakLumiFill">Peak Instantaneous Lumi over LHC Fill Number</button>
+		  <button type="submit" class="list-group-item" id="addPeakLumiTime">Peak Instantaneous Lumi over Time</button>
+		  <button type="submit" class="list-group-item" id="addAvgLumiFill">Average Instantaneous Lumi over LHC Fill Number</button>
+		  <button type="submit" class="list-group-item" id="addAvgLumiTime">Average Instantaneous Lumi over Time</button>
 		</div>
 	</div>
   	<div class="col-xs-6">
@@ -22,29 +22,25 @@
 		<script type="text/javascript">
 		$("#addPeakLumiFill").mousedown(function(){
 			$('#plots').load(document.URL +  ' #plots');
-			});
-		$("#addPeakLumiFill").mouseup(function(){
+			}).mouseup(function(){
 			$('<img class="img-responsive" src="{{ url_for('static', filename='img/OUTPUTPLOTS/2015PeakLumiFill.png') }}">').appendTo($("#plots"));
 			wheelzoom(document.querySelector('img.img-responsive'));
 			});
 		$("#addPeakLumiTime").mousedown(function(){
 			$('#plots').load(document.URL +  ' #plots');
-			});
-		$("#addPeakLumiTime").mouseup(function(){
+			}).mouseup(function(){
 			$('<img class="img-responsive" src="{{ url_for('static', filename='img/OUTPUTPLOTS/2015PeakLumiTime.png') }}">').appendTo($("#plots"));
 			wheelzoom(document.querySelector('img.img-responsive'));
 			});
 		$("#addAvgLumiFill").mousedown(function(){
 			$('#plots').load(document.URL +  ' #plots');
-			});
-		$("#addAvgLumiFill").mouseup(function(){
+			}).mouseup(function(){
 			$('<img class="img-responsive" src="{{ url_for('static', filename='img/OUTPUTPLOTS/2015AvgLumiFill.png') }}">').appendTo($("#plots"));
 			wheelzoom(document.querySelector('img.img-responsive'));
 			});
 		$("#addAvgLumiTime").mousedown(function(){
 			$('#plots').load(document.URL +  ' #plots');
-			});
-		$("#addAvgLumiTime").mouseup(function(){
+			}).mouseup(function(){
 			$('<img class="img-responsive" src="{{ url_for('static', filename='img/OUTPUTPLOTS/2015AvgLumiTime.png') }}">').appendTo($("#plots"));
 			wheelzoom(document.querySelector('img.img-responsive'));
 			});
@@ -57,12 +53,8 @@
 
 
 
-<!-- d3.js plotting scripts!-->
-  <script src="../static/js/lib/d3.v3.min.js"></script>
-  <script src="../static/js/lib/d3.chart.min.js"></script>
-  <script src="../static/js/dist/d3.chart.histograms.js?n=1"></script>
 <!-- zooming images script!-->
-  <script src="../static/js/wheelzoom.js"></script>
+  <script src="{{ url_for('static', filename='js/wheelzoom.js') }}"></script>
   
 
 <!-- google analytics scripts !-->

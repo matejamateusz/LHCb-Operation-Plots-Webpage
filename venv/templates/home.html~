@@ -11,6 +11,7 @@
 <!-- --------------------------------------------- !-->
 <!-- CANVAS FOR CONVERTED IMAGE FROM SVG !-->
 <canvas width="550" height="550" style="display:none"></canvas>
+
     <div class="page-header">
         <h1>Experimental conditions</h1>
     </div>
@@ -107,7 +108,7 @@
     }
     }
 </script>
-<!-- disabling/enabling button script !-->
+<!-- disabling/enabling button script with LOADING THE PLOTS !-->
 <script>
   function disableEnableBtn(ids)
  {
@@ -123,7 +124,7 @@
            this.setAttribute('disabled', 'disabled');     // disables the button by adding the 'disabled' attribute
            this.innerHTML = 'Disabled';        // changes the button text
            var idbtn = this.id;       // stores the button ID
-           $.getScript('../static/js/examples.js');
+           $.getScript('../static/js/examples.js'); // LOADING PLOTS VIA SCRIPT !!!
            // calls a function after 2 sec. (2000 milliseconds)
            setTimeout( function()
                 {
@@ -136,7 +137,8 @@
 }
 // array with IDs of buttons
 var btnid = ['load_plots'];
-disableEnableBtn(btnid);      // calls the function
+
+disableEnableBtn(btnid);      // calls the function !!!
 </script>
 
 

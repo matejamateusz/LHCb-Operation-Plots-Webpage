@@ -108,7 +108,7 @@
     }
     }
 </script>
-<!-- disabling/enabling button script !-->
+<!-- disabling/enabling button script with LOADING THE PLOTS !-->
 <script>
   function disableEnableBtn(ids)
  {
@@ -124,8 +124,8 @@
            this.setAttribute('disabled', 'disabled');     // disables the button by adding the 'disabled' attribute
            this.innerHTML = 'Disabled';        // changes the button text
            var idbtn = this.id;       // stores the button ID
-           $.getScript('../static/js/examples.js');
-           // calls a function after 2 sec. (2000 milliseconds)
+           $.getScript('../static/js/examples.js'); // LOADING PLOTS VIA SCRIPT !!!
+           // calls a function after 4 sec. (4000 milliseconds)
            setTimeout( function()
                 {
                     document.getElementById(idbtn).removeAttribute('disabled');         // removes the "disabled" attribute
@@ -137,17 +137,18 @@
 }
 // array with IDs of buttons
 var btnid = ['load_plots'];
-disableEnableBtn(btnid);      // calls the function
+
+disableEnableBtn(btnid);      // calls the function !!!
 </script>
 
 
 
 <!-- d3.js plotting scripts!-->
-  <script src="../static/js/lib/d3.v3.min.js"></script>
-  <script src="../static/js/lib/d3.chart.min.js"></script>
-  <script src="../static/js/dist/d3.chart.histograms.js?n=1"></script>
-  <script src="../static/js/svgtopng.js"></script>
-  <!--<script src="../static/js/svgtopng2.js"></script>!-->
+  <script src="{{ url_for('static', filename='js/lib/d3.v3.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/lib/d3.chart.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/dist/d3.chart.histograms.js') }}"></script>
+<!-- svg to png converting script!-->
+  <script src="{{ url_for('static', filename='js/svgtopng.js') }}"></script>
 
 
 <!-- google analytics scripts !-->
