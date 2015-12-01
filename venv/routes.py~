@@ -19,7 +19,7 @@ def select():
     selected_histogram = request.args.get('a')
     print selected_histogram
     from subprocess import call 
-    call(['python', 'ExpCondAnalyser.py', '-r', str(selected_histogram), '-T', '-bla'])
+    call(['python', 'ExpCondAnalyser.py', '-r', str(selected_histogram), '-T', '-b'])
     return jsonify(result=selected_histogram)
 
 

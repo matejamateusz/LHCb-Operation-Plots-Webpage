@@ -1,7 +1,7 @@
 from venv import app
 from flask import render_template, request, jsonify
 #flash, session, redirect, url_forve, Flask
-from subprocess import Popen, PIPE
+from subprocess import Popen, PIPE, call
 import os
 import json
 os.environ['TERM'] = 'dumb'
@@ -16,11 +16,11 @@ def plots2015():
 
 @app.route('/home/_select')
 def select():
-    selected_histogram = request.args.get('a')
-    print selected_histogram
-    from subprocess import call 
-    call(['python', 'ExpCondAnalyser.py', '-r', str(selected_histogram), '-T', '-b'])
-    return jsonify(result=selected_histogram)
+    selected_runnumber = request.args.get('a')
+    print selected_runnumber
+    #from subprocess import call 
+    call(['python', 'ExpCondAnalyser.py', '-r', str(selected_runnumber), '-T', '-b'])
+    return jsonify(result=selected_runnumber)
 
 
 @app.route('/data/histogram0.json')
